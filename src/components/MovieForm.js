@@ -43,7 +43,7 @@ const Button = styled.button`
   min-width: 200px;
 `;
 const ErrorLabel = styled.div`
-  color: red;
+  color: ${({ isBlack }) => (isBlack ? "black" : "red")};
   font-size: 12px;
   margin-top: 5px;
 `;
@@ -102,8 +102,6 @@ const MovieForm = () => {
     const isFormValid = validateForm(); // Validamos el formulario antes de enviarlo
 
     if (isFormValid) {
-      debugger;
-
       try {
         await handleSubmit(formData);
         openModal();
@@ -143,13 +141,13 @@ const MovieForm = () => {
         <Label>Relaase Date:</Label>
 
         <Input
-          // mask="YYYY-MM-DD"
           type="text"
           name="date"
           value={formData.date}
           onChange={handleChange}
           maskPlaceholder="YYYY-MM-DD"
         />
+        <ErrorLabel isBlack>format "YYYY-MM-DD" </ErrorLabel>
 
         {/* <InputMask /> */}
         {errors.date && <ErrorLabel>{errors.date}</ErrorLabel>}
